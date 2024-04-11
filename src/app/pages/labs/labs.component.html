@@ -1,0 +1,26 @@
+<h1>HOla mi primer proyecto</h1>
+<ul *ngFor="let task of tasks()">
+    <li>{{ task }}</li>
+</ul>
+<div ngSwitch="person().name">
+    <p *ngSwitchCase="'jesus'">yo soy jesus y tengo mas de 18</p>
+    <p *ngSwitchCase="'nancy'">yo soy nancy </p>
+    <p *ngSwitchDefault="">yo no soy nadie</p>
+</div>
+
+<div>
+    <input type="color" [formControl]="colorCtrl">
+    <p>color: {{ colorCtrl.value }}</p>
+</div>
+
+
+<input type="number" [formControl]="widthCtrl">
+<span class="box" [style.width.px]="widthCtrl.value"></span>
+
+<p>
+    <input type="text" [formControl]="nameCtrl"> <br>
+    <span class="messageError" [class.show]="nameCtrl.invalid && nameCtrl.touched">nombre invalido</span>
+</p>
+<p>
+    <input type="text">
+</p>

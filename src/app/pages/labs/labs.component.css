@@ -1,0 +1,17 @@
+.box{
+    height: 10px;
+    display: block;
+    background-color: red;
+}
+
+.messageError{
+     background-color: red;
+     color: white;
+     opacity: 0;
+     transition: all linear .5s;
+}
+
+.messageError.show{
+    opacity: 1;
+
+}
