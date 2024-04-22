@@ -1,11 +1,21 @@
 <h1>HOla mi primer proyecto</h1>
-<ul *ngFor="let task of tasks()">
+@for (task of tasks(); track task) {
+<ul>
     <li>{{ task }}</li>
 </ul>
-<div ngSwitch="person().name">
-    <p *ngSwitchCase="'jesus'">yo soy jesus y tengo mas de 18</p>
-    <p *ngSwitchCase="'nancy'">yo soy nancy </p>
-    <p *ngSwitchDefault="">yo no soy nadie</p>
+}
+<div>
+    @switch (person().name) {
+        @case ('jesus') {
+        <p>soy jesus</p>
+        }
+        @case ('luis') {
+        <p>soy luis</p>
+        }
+        @default {
+        <p>Name no encontrado</p>
+        }
+        }
 </div>
 
 <div>
@@ -24,3 +34,40 @@
 <p>
     <input type="text">
 </p>
+@if (name() === 'jesus') {
+<div>Soy jesus</div>
+}
+
+<h2>
+    if else new syntax
+</h2>
+@if (person().name === 'jeus') {
+<div>soy jesus</div>
+}@else if (person().age >18) {
+<div>y soy mayor de edad</div>
+}
+@else {
+<div>no soy jesus</div>
+}
+<h2>for</h2>
+<ul>
+    @for (task of tasks(); track task; let i= $index) {
+    <li>{{ i }} {{ task }}</li>
+    }@empty {
+    <li><strong>lista vacia </strong></li>
+    }
+</ul>
+<h2>switch</h2>
+<div>
+    @switch (person().name) {
+    @case ('jesus') {
+    <p>soy jesus</p>
+    }
+    @case ('luis') {
+    <p>soy luis</p>
+    }
+    @default {
+    <p>Name no encontrado</p>
+    }
+    }
+</div>

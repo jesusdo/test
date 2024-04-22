@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, input, signal } from '@angular/core';
 import { ServicesService } from '../../services.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,7 +9,7 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 @Component({
   selector: 'app-labs',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule],
+  imports: [HttpClientModule, ReactiveFormsModule],
   templateUrl: './labs.component.html',
   styleUrl: './labs.component.css',
   providers: [ServicesService]
@@ -21,7 +21,8 @@ export class LabsComponent {
           'Crear componentes',
           'configurar rutas'  
         ]);
-  person = signal([{name: "jesus", age: 34}]);
+  person = signal({name: "jesus", age: 34});
+  name= signal('jesus2');
   
   constructor(private service:ServicesService){
     service.get2().subscribe((data: any) => console.log(data));

@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { DetailTicketModalComponent } from "../detail-ticket-modal/detail-ticket-modal.component";
 import { CommonModule } from '@angular/common';
 import { SwitchService } from '../../services/switch.service';
@@ -15,28 +15,7 @@ import { Filters } from '../../clases';
 })
 export class HomeComponent {
 
-  tasks = signal<Task[]>([
-    {
-      id: Date.now(),
-      title: 'Crear proyecto',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Instlar angular CLI',
-      completed: true
-    },
-    {
-      id: Date.now(),
-      title: 'Crear proyecto nuevo',
-      completed: false
-    },
-    {
-      id: Date.now(),
-      title: 'Configurar rutas',
-      completed: true
-    }
-  ]);
+  tasks = signal<Task[]>([]);
 
   filter = signal<'all' | 'pending' | 'completed'>('all');
   taskByFilter = computed(() =>{
@@ -114,8 +93,22 @@ export class HomeComponent {
     // })
   };
 
+  constructor(){
+    //con el efect vigilamos cambios 
+    effect(() => {
+      const tasks = this.tasks();
+      console.log(tasks);
+      localStorage.setItem('tasks', JSON.stringify(tasks))
+    })
+  }
+
   ngOnInit(){
     document.body.style.background = "url(../../assets/wallgeek.png)"
+    const storage = localStorage.getItem('tasks');
+    if(storage){
+      const tasks = JSON.parse(storage);
+      this.tasks.set(tasks);
+    }
   }
 
   updateTaskEditingMode(index: number){
@@ -152,6 +145,7 @@ export class HomeComponent {
   changeFilter(filter: 'all' | 'pending' | 'completed'){
     this.filter.set(filter);
   }
+
 
 
 }
